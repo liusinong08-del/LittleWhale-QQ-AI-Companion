@@ -1,0 +1,27 @@
+[Unit]
+Description=LittleWhale QQ gateway (NapCat 4.18.38)
+After=network-online.target
+Wants=network-online.target
+ConditionPathExists=/home/littlewhale/.littlewhale/cloud-migration-ready
+
+[Service]
+User=littlewhale
+Group=littlewhale
+WorkingDirectory=/home/littlewhale/.littlewhale-napcat
+Environment=HOME=/home/littlewhale/.littlewhale-napcat/home
+Environment=XDG_CONFIG_HOME=/home/littlewhale/.littlewhale-napcat/config
+Environment=XDG_RUNTIME_DIR=/home/littlewhale/.littlewhale-napcat/runtime
+Environment=TZ=Asia/Shanghai
+ExecStart=/usr/bin/xvfb-run -a -s "-screen 0 720x1280x24 -nolisten tcp" /home/littlewhale/.littlewhale-napcat/opt/QQ/qq --no-sandbox --disable-gpu
+Restart=on-failure
+RestartSec=15
+TimeoutStopSec=45
+UMask=0077
+NoNewPrivileges=true
+PrivateTmp=true
+# QQ startup can print login QR codes and WebUI tokens; keep diagnostics private.
+StandardOutput=append:/home/littlewhale/.littlewhale-napcat/logs/console.log
+StandardError=append:/home/littlewhale/.littlewhale-napcat/logs/console.log
+
+[Install]
+WantedBy=multi-user.target

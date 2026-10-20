@@ -1,0 +1,8 @@
+{
+  "repository": "https://github.com/pinganbbOvO/ai-companion-kit",
+  "commit": "24a9a0c6896b5bfe85d046c2ed245fd61cf9e090",
+  "path": "packages/companion/src/humanize.js",
+  "sha256": "191be3ae33c289f733e0ea0f5cec00dc6126f6a62762ad1251cc6028addb68b5",
+  "license": "MIT",
+  "modified": false
+}

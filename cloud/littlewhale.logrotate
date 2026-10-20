@@ -1,0 +1,11 @@
+/home/littlewhale/.littlewhale-napcat/logs/console.log {
+    daily
+    maxsize 5M
+    rotate 7
+    compress
+    missingok
+    notifempty
+    su littlewhale littlewhale
+    # ponytail: copytruncate may lose lines during rotation; exact audit logs need a reopenable writer.
+    copytruncate
+}

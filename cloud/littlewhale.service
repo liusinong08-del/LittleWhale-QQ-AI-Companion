@@ -1,0 +1,33 @@
+[Unit]
+Description=LittleWhale direct API core
+After=network-online.target
+Wants=network-online.target
+ConditionPathExists=/home/littlewhale/.littlewhale/cloud-migration-ready
+ConditionPathExists=/home/littlewhale/.littlewhale/memory.sqlite3
+ConditionPathExists=/home/littlewhale/.littlewhale/config.json
+ConditionPathExists=/home/littlewhale/.littlewhale/role.md
+
+[Service]
+User=littlewhale
+Group=littlewhale
+WorkingDirectory=/opt/littlewhale
+Environment=HOME=/home/littlewhale
+Environment=PYTHONDONTWRITEBYTECODE=1
+Environment=TZ=Asia/Shanghai
+Environment=LITTLEWHALE_DISABLE_QQ_AUDIO=1
+ExecStart=/usr/bin/python3 /opt/littlewhale/app.py --home /home/littlewhale/.littlewhale --port 8767 --no-browser
+Restart=on-failure
+RestartSec=10
+TimeoutStopSec=80
+KillSignal=SIGINT
+UMask=0077
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ReadWritePaths=/home/littlewhale
+# The startup URL contains a bearer token; it remains in the private panel-url file.
+StandardOutput=null
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target
